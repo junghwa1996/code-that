@@ -1,20 +1,21 @@
-import { useState } from 'react';
-import { getQuestions } from '../api';
-import DateText from '../components/DateText';
-import ListPage from '../components/ListPage';
-import Warn from '../components/Warn';
-import Card from '../components/Card';
-import Avatar from '../components/Avatar';
-import styles from './QuestionListPage.module.css';
-import searchBarStyles from '../components/SearchBar.module.css';
-import searchIcon from '../assets/search.svg';
+import { useState } from "react";
+import { getQuestions } from "../api";
+import DateText from "../components/DateText";
+import ListPage from "../components/ListPage";
+import Warn from "../components/Warn";
+import Card from "../components/Card";
+import Avatar from "../components/Avatar";
+import styles from "./QuestionListPage.module.css";
+import searchBarStyles from "../components/SearchBar.module.css";
+import searchIcon from "../assets/search.svg";
+import { Link } from "react-router-dom";
 
 function QuestionItem({ question }) {
   return (
     <Card className={styles.questionItem} key={question.title}>
       <div className={styles.info}>
         <p className={styles.title}>
-          {question.title}
+          <Link to={`/questions/${question.id}`}>{question.title}</Link>
           {question.answers.length > 0 && (
             <span className={styles.count}>[{question.answers.length}]</span>
           )}
@@ -34,26 +35,26 @@ function QuestionItem({ question }) {
 }
 
 function QuestionListPage() {
-  const [keyword, setKeyword] = useState('');
+  const [keyword, setKeyword] = useState("");
   const questions = getQuestions();
 
   const handleKeywordChange = (e) => setKeyword(e.target.value);
 
   return (
     <ListPage
-      variant="community"
-      title="커뮤니티"
-      description="코드댓의 2만 수강생들과 함께 공부해봐요."
+      variant='community'
+      title='커뮤니티'
+      description='코드댓의 2만 수강생들과 함께 공부해봐요.'
     >
       <form className={searchBarStyles.form}>
         <input
-          name="keyword"
+          name='keyword'
           value={keyword}
-          placeholder="검색으로 질문 찾기"
+          placeholder='검색으로 질문 찾기'
           onChange={handleKeywordChange}
         />
-        <button type="submit">
-          <img src={searchIcon} alt="검색" />
+        <button type='submit'>
+          <img src={searchIcon} alt='검색' />
         </button>
       </form>
 
@@ -62,8 +63,8 @@ function QuestionListPage() {
       {questions.length === 0 ? (
         <Warn
           className={styles.emptyList}
-          title="조건에 맞는 질문이 없어요."
-          description="올바른 검색어가 맞는지 다시 한 번 확인해 주세요."
+          title='조건에 맞는 질문이 없어요.'
+          description='올바른 검색어가 맞는지 다시 한 번 확인해 주세요.'
         />
       ) : (
         <div className={styles.questionList}>
