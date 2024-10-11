@@ -1,15 +1,17 @@
-import classNames from 'classnames';
-import { getQuestionById } from '../api';
-import Avatar from '../components/Avatar';
-import Card from '../components/Card';
-import Container from '../components/Container';
-import DateText from '../components/DateText';
-import Lined from '../components/Lined';
-import Warn from '../components/Warn';
-import styles from './QuestionPage.module.css';
+import classNames from "classnames";
+import { getQuestionById } from "../api";
+import Avatar from "../components/Avatar";
+import Card from "../components/Card";
+import Container from "../components/Container";
+import DateText from "../components/DateText";
+import Lined from "../components/Lined";
+import Warn from "../components/Warn";
+import styles from "./QuestionPage.module.css";
+import { useParams } from "react-router-dom";
 
 function QuestionPage() {
-  const question = getQuestionById('616825');
+  const { questionsId } = useParams();
+  const question = getQuestionById(questionsId);
 
   return (
     <>
@@ -53,8 +55,8 @@ function QuestionPage() {
           ))
         ) : (
           <Warn
-            title="답변을 기다리고 있어요."
-            description="이 질문의 첫 번째 답변을 달아주시겠어요?"
+            title='답변을 기다리고 있어요.'
+            description='이 질문의 첫 번째 답변을 달아주시겠어요?'
           />
         )}
       </Container>
