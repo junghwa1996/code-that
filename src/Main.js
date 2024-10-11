@@ -21,7 +21,7 @@ function Main() {
           <Route path='wishlist' element={<WishlistPage />} />
           <Route path='questions'>
             <Route index element={<QuestionListPage />} />
-            <Route path=':questionsId' element={<QuestionPage />} />
+            <Route path=':questionId' element={<QuestionPage />} />
           </Route>
           <Route path='*' element={<NotFoundPage />} />
         </Route>

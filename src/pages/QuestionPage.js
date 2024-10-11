@@ -1,5 +1,6 @@
 import classNames from "classnames";
 import { getQuestionById } from "../api";
+import { Navigate, useParams } from "react-router-dom";
 import Avatar from "../components/Avatar";
 import Card from "../components/Card";
 import Container from "../components/Container";
@@ -7,11 +8,12 @@ import DateText from "../components/DateText";
 import Lined from "../components/Lined";
 import Warn from "../components/Warn";
 import styles from "./QuestionPage.module.css";
-import { useParams } from "react-router-dom";
 
 function QuestionPage() {
-  const { questionsId } = useParams();
-  const question = getQuestionById(questionsId);
+  const { questionId } = useParams();
+  const question = getQuestionById(questionId);
+
+  if (!question) return <Navigate to='/questions' />;
 
   return (
     <>
